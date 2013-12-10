@@ -1,5 +1,4 @@
-#from stockretriever import stockretriever
-import sys
+from stockretriever import stockretriever
 
 if __name__ == '__main__':
     print 'Begin task'
