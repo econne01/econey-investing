@@ -1,6 +1,8 @@
 *.pyc
 *.pyo
 .installed.cfg
+.project
+.pydevproject
 bin
 develop-eggs
 eggs
