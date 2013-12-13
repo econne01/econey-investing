@@ -1,5 +1,6 @@
 *.pyc
 *.pyo
+*.db
 .installed.cfg
 .project
 .pydevproject
@@ -7,4 +8,4 @@ bin
 develop-eggs
 eggs
 parts
-src/*.egg-info
+*.egg-info*

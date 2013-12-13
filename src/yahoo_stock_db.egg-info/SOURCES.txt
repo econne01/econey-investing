@@ -1,4 +1,5 @@
 setup.py
+src/project/__init__.py
 src/stock-history/__init__.py
 src/stock-history/get_history.py
 src/yahoo_stock_db.egg-info/PKG-INFO
