@@ -1,2 +1,2 @@
-project
-stock-history
+stock_history
+stock_db

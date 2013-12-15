@@ -1,7 +1,13 @@
 setup.py
-src/project/__init__.py
-src/stock-history/__init__.py
-src/stock-history/get_history.py
+src/stock_db/__init__.py
+src/stock_db/settings.py
+src/stock_db/stock_db.py
+src/stock_history/__init__.py
+src/stock_history/get_history.py
+src/stock_history/reset_db.py
+src/stock_history/tickers.py
+src/stock_history/views/__init__.py
+src/stock_history/views/stock_profile.py
 src/yahoo_stock_db.egg-info/PKG-INFO
 src/yahoo_stock_db.egg-info/SOURCES.txt
 src/yahoo_stock_db.egg-info/dependency_links.txt
