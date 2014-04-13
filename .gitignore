@@ -1,0 +1,11 @@
+*.pyc
+*.pyo
+*.db
+.installed.cfg
+.project
+.pydevproject
+bin
+develop-eggs
+eggs
+parts
+*.egg-info*
