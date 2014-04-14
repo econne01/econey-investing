@@ -2,12 +2,14 @@ import sqlite3
 from stockretriever import stockretriever
 from stock_history.tickers import Tickers
 
+from stock_db import settings
+
 if __name__ == '__main__':
-    conn = sqlite3.connect('/stocks.db')
+    conn = sqlite3.connect(settings.DATABASE)
     c = conn.cursor()
-    
+
     sr = stockretriever.StockRetriever()
-    
+
     for industry in Tickers.tickers:
         for tkr in Tickers.tickers[industry]:
             print 'Getting prices for %s' %(tkr)
@@ -25,7 +27,7 @@ if __name__ == '__main__':
                         values (?,?,?,?)''',
                         (row['Date'], tkr, row['Volume'], row['AdjClose'],)
                     )
-    
+
     conn.commit()
     conn.close()
-    
+
