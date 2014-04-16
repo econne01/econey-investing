@@ -4,7 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from contextlib import closing
 
 SETTINGS_MODULE = 'settings.common'
-TEMPLATE_DIRECTORY = '/home/eric/projects/personal/yahoo-stock-db/src/templates'
+TEMPLATE_DIRECTORY = '/home/eric/projects/personal/econey-investing/src/templates'
 SYNCDB_SQL = 'app/schema.sql'
 
 app = Flask(__name__, template_folder=TEMPLATE_DIRECTORY)
