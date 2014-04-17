@@ -1,9 +1,9 @@
 import requests
 import sqlite3
 
-from stock_db import settings
+from settings import common
 
-class ImportBLS(object):
+class BLSDataFetcher(object):
     ''' For more info:
         http://www.bls.gov/help/hlpforma.htm#CE
     '''
@@ -38,7 +38,7 @@ class ImportBLS(object):
     def import_data(self, data, options):
         ''' Insert/Update data into local database
         '''
-        conn = sqlite3.connect(settings.DATABASE)
+        conn = sqlite3.connect(common.DATABASE)
         c = conn.cursor()
 
         for row in data:
