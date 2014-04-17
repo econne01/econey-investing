@@ -1,13 +1,13 @@
 import sqlite3
 from stockretriever import stockretriever
-from app.stocks.tickers import Tickers
+from app.stocks.config import Tickers
 
-from settings import common
+from settings.common import Settings
 
 class StockDataFetcher(object):
 
     def run(self):
-        conn = sqlite3.connect(common.DATABASE)
+        conn = sqlite3.connect(Settings.DATABASE)
         c = conn.cursor()
 
         sr = stockretriever.StockRetriever()

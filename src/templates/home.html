@@ -2,7 +2,11 @@
 {% block body %}
     <ul class=entries>
     {% for entry in entries %}
-        <li>{{ entry.ticker }}</li>
+        <li>
+            <div>{{ entry.date }}</div>
+            <div>{{ entry.ticker }}</div>
+            <div>{{ entry.price }}</div>
+        </li>
     {% else %}
         <li><em>Unbelievable.  No entries here so far</em></li>
     {% endfor %}

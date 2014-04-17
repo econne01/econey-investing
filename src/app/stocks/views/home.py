@@ -7,6 +7,7 @@ def home():
     cur = g.db.execute('''
         SELECT ticker, date, volume, price
         FROM stocks
+        GROUP BY ticker
         ORDER BY ticker, date DESC
     ''')
     entries = [row for row in cur.fetchall()]

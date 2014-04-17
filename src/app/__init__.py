@@ -3,7 +3,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 
-SETTINGS_MODULE = 'settings.common'
+SETTINGS_MODULE = 'settings.flask'
 TEMPLATE_DIRECTORY = '/home/eric/projects/personal/econey-investing/src/templates'
 SYNCDB_SQL = 'app/schema.sql'
 
