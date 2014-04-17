@@ -10,7 +10,7 @@ SYNCDB_SQL = 'app/schema.sql'
 app = Flask(__name__, template_folder=TEMPLATE_DIRECTORY)
 app.config.from_object(SETTINGS_MODULE)
 
-from stock_db import views
+from app.stocks import views
 
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])

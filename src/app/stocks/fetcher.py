@@ -1,6 +1,6 @@
 import sqlite3
 from stockretriever import stockretriever
-from stock_history.tickers import Tickers
+from app.stocks.tickers import Tickers
 
 from settings import common
 
