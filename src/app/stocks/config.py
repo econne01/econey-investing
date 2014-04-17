@@ -1,5 +1,5 @@
 class Tickers(object):
-    
+
     tickers = {
         'DOW': [
             'AXP',
