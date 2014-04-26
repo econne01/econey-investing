@@ -1,0 +1,18 @@
+{% extends "base2.html" %}
+
+{% block body %}
+    <h1>Yahoo Stock DB (v2)</h1>
+
+    <ul class="entries">
+    {% for entry in entries %}
+        <li>
+            <div>{{ entry.date }}</div>
+            <div>{{ entry.ticker }}</div>
+            <div>{{ entry.price }}</div>
+        </li>
+    {% else %}
+        <li><em>Unbelievable.  No entries here so far</em></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

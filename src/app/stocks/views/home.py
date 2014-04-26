@@ -11,5 +11,5 @@ def home():
         ORDER BY ticker, date DESC
     ''')
     entries = [row for row in cur.fetchall()]
-    return render_template('home.html', entries=entries)
+    return render_template('home2.html', entries=entries)
 

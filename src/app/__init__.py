@@ -3,11 +3,15 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 
-SETTINGS_MODULE = 'settings.flask'
-TEMPLATE_DIRECTORY = '/home/eric/projects/personal/econey-investing/src/templates'
-SYNCDB_SQL = 'app/schema.sql'
+from settings.common import Settings
 
-app = Flask(__name__, template_folder=TEMPLATE_DIRECTORY)
+SETTINGS_MODULE = 'settings.flask'
+
+app = Flask(
+    __name__,
+    static_folder=Settings.STATIC_DIRECTORY,
+    template_folder=Settings.TEMPLATE_DIRECTORY
+)
 app.config.from_object(SETTINGS_MODULE)
 
 from app.stocks import views
