@@ -1,0 +1,18 @@
+{% extends "base2.html" %}
+
+{% block body %}
+    <h1>Yahoo Stock Trends</h1>
+
+    <div>
+    {% for ticker in trends %}
+        <div>
+            <div>{{ ticker }}</div>
+            <div>{{ trends[ticker][0]['date'] }}</div>
+            <div>{{ trends[ticker][0]['price'] }}</div>
+            <div>{{ trends[ticker][1]['date'] }}</div>
+            <div>{{ trends[ticker][1]['price'] }}</div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+
