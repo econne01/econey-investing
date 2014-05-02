@@ -3,16 +3,27 @@
 {% block body %}
     <h1>Yahoo Stock Trends</h1>
 
-    <div>
+    <table>
+        <tr>
+            <th>Ticker</th>
+            <th>1st Date</th>
+            <th>1st Price</th>
+            <th>2nd Date</th>
+            <th>2nd Price</th>
+            <th>Recent Trend Period</th>
+            <th>Percent of<br/>Trend Range</th>
+        </tr>
     {% for ticker in trends %}
-        <div>
-            <div>{{ ticker }}</div>
-            <div>{{ trends[ticker][0]['date'] }}</div>
-            <div>{{ trends[ticker][0]['price'] }}</div>
-            <div>{{ trends[ticker][1]['date'] }}</div>
-            <div>{{ trends[ticker][1]['price'] }}</div>
-        </div>
+        <tr>
+            <td>{{ ticker }}</td>
+            <td>{{ trends[ticker][0]['date'] }}</td>
+            <td>{{ trends[ticker][0]['price'] }}</td>
+            <td>{{ trends[ticker][1]['date'] }}</td>
+            <td>{{ trends[ticker][1]['price'] }}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
     {% endfor %}
-    </div>
+    </table>
 {% endblock %}
 
