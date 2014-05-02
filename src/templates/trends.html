@@ -13,13 +13,13 @@
             <th>Recent Trend Period</th>
             <th>Percent of<br/>Trend Range</th>
         </tr>
-    {% for ticker in trends %}
+    {% for data in trends %}
         <tr>
-            <td>{{ ticker }}</td>
-            <td>{{ trends[ticker][0]['date'] }}</td>
-            <td>{{ trends[ticker][0]['price'] }}</td>
-            <td>{{ trends[ticker][1]['date'] }}</td>
-            <td>{{ trends[ticker][1]['price'] }}</td>
+            <td>{{ data['ticker'] }}</td>
+            <td>{{ data['min_price_date'] }}</td>
+            <td>{{ data['min_price'] }}</td>
+            <td>{{ data['max_price_date'] }}</td>
+            <td>{{ data['max_price'] }}</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
@@ -27,3 +27,6 @@
     </table>
 {% endblock %}
 
+{% block extra_scripts %}
+    <script src="{{ url_for('static', filename='js/trends.js') }}"></script>
+{% endblock %}
