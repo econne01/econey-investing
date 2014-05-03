@@ -14,7 +14,8 @@
         {% block body %}{% endblock %}
 
         {% block script_includes %}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+        <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
         <script type=text/javascript>
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};

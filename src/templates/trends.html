@@ -10,17 +10,17 @@
             <th>1st Price</th>
             <th>2nd Date</th>
             <th>2nd Price</th>
-            <th>Recent Trend Period</th>
+            <th id='chart-trend-header'>Recent Trend Period</th>
             <th>Percent of<br/>Trend Range</th>
         </tr>
     {% for data in trends %}
-        <tr>
-            <td>{{ data['ticker'] }}</td>
+        <tr class="row-summary row-trend" id="{{ data['ticker'] }}">
+            <td class="ticker">{{ data['ticker'] }}</td>
             <td>{{ data['min_price_date'] }}</td>
             <td>{{ data['min_price'] }}</td>
             <td>{{ data['max_price_date'] }}</td>
             <td>{{ data['max_price'] }}</td>
-            <td>&nbsp;</td>
+            <td class="chart-trend"></td>
             <td>&nbsp;</td>
         </tr>
     {% endfor %}
