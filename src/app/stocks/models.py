@@ -22,7 +22,9 @@ class StockHandler(object):
             'min_price_date': None,
             'min_price': None,
             'max_price_date': None,
-            'max_price': None
+            'max_price': None,
+            'current_range': None,
+            'pct_of_range': None,
         }
 
         dates = price_history.keys()
@@ -57,6 +59,12 @@ class StockHandler(object):
             price_change_pct = (price_history[date]-earlier_price)/((price_history[date]+earlier_price)/2)
             if price_change_pct > self.local_extrema_min_price_change_pct:
                 break
+
+        # Calculate the percent of trend range
+        current_price = price_history[dates[0]]
+        data['current_price'] = current_price
+        data['pct_of_range'] = (current_price - min(data['min_price'], data['max_price']))/abs(data['min_price']-data['max_price'])
+        data['pct_of_range'] = int(100*data['pct_of_range'])
 
         return data
 

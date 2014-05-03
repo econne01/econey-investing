@@ -8,23 +8,20 @@ path {
     fill: none;
 }
 
-.axis {
+.x-axis {
     shape-rendering: crispEdges;
+    font-weight: normal;
 }
 
-.x.axis line {
+.x-axis line {
     stroke: lightgrey;
 }
 
-.x.axis .minor {
+.x-axis .minor {
     stroke-opacity: .5;
 }
 
-.x.axis path {
+.x-axis path {
     display: none;
 }
 
-.y.axis line, .y.axis path {
-    fill: none;
-    stroke: #000;
-}
