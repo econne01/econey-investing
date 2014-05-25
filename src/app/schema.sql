@@ -6,6 +6,15 @@ CREATE TABLE stocks (
   price real not null
 );
 
+DROP TABLE IF EXISTS results_year;
+CREATE TABLE results_year (
+  ticker text not null,
+  year smallint not null,
+  revenue real null,
+  interest real null,
+  net_income real null
+);
+
 DROP TABLE IF EXISTS macro_jobs;
 CREATE TABLE macro_jobs (
   year smallint not null,
