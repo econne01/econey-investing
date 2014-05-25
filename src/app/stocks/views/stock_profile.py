@@ -1,4 +1,6 @@
 import sqlite3
+from flask import render_template
+from app import app
 
 class StockProfileView(object):
 
@@ -22,3 +24,10 @@ class StockProfileView(object):
 
         conn.close()
         return 'Date: %s, Price: %s' %(date, price)
+
+@app.route('/analysis/<ticker>')
+def profile(ticker):
+    data = {
+        'ticker': ticker.upper(),
+    }
+    return render_template('profile.html', data=data)

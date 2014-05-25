@@ -13,6 +13,7 @@ app = Flask(
     template_folder=Settings.TEMPLATE_DIRECTORY
 )
 app.config.from_object(SETTINGS_MODULE)
+app.config['UPLOAD_FOLDER'] = Settings.UPLOAD_DIRECTORY
 
 from app.stocks import views
 

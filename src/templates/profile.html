@@ -1,0 +1,25 @@
+{% extends "base2.html" %}
+
+{% block body %}
+    <h1>{{ data['ticker'] }}</h1>
+
+    <div> Items to input </div>
+    <ul>
+        <li>Revenue</li>
+        <li>Operating Income (EBIT)</li>
+        <li>Interest Expense</li>
+        <li>Book Value of Equity</li>
+        <li>Book Value of Debt</li>
+        <li>Cash and Cross Holdings value</li>
+        <li>Number Shares Outstanding</li>
+        <li>Current Stock Price</li>
+        <li>Effective Tax Rate</li>
+    </ul>
+
+    <div>Market Inputs</div>
+    <ul>
+        <li>Risk Free Rate</li>
+        <li>Inflation?</li>
+    </ul>
+{% endblock %}
+
