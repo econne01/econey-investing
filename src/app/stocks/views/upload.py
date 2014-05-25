@@ -9,7 +9,8 @@ from app.stocks.views import EconeyBaseViewHandler
 
 class StockHistoryUploader(EconeyBaseViewHandler):
 
-    db_name= 'results_year.db'
+    db_name= 'stocks.db'
+    table_name = 'results_year'
 
     # Columns of upload file must contain Ticker, Year, then any optional data columns
     column_format = {
@@ -42,25 +43,18 @@ class StockHistoryUploader(EconeyBaseViewHandler):
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
 
-        import pudb; pudb.set_trace()  # XXX BREAKPOINT
         reader = csv.DictReader(file)
 
         if self.is_file_format_accepted(reader.fieldnames):
             for row in reader:
                 print row
-                cursor.execute('''
-                    INSERT INTO ?
-                    (Ticker, Year, Revenue)
-                    VALUES (?, ?, ?)
-                    ''',
-                    (
-                        self.db_name,
-                        row['Ticker'],
-                        row['Year'],
-                        row['Revenue'],
-                    )
-                )
+                qry = 'INSERT INTO ' + self.table_name
+                qry += ' (' + ','.join(reader.fieldnames) + ')'
+                qry += ' VALUES ("' + '","'.join([row[field] for field in reader.fieldnames]) + '")'
 
+                cursor.execute(qry)
+
+        conn.commit()
         conn.close()
         return row_cnt
 
