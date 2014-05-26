@@ -20,32 +20,48 @@ from app.stocks import views
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(app.config['DATABASE'])
+        db.row_factory = sqlite3.Row
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db:
+        db.close()
+
 def init_db():
-    with closing(connect_db()) as db:
-        with app.open_resource(SETTINGS_MODULE, mode='r') as f:
+    with app.app_context():
+        db = get_db()
+        with app.open_resource(Settings.SYNCDB_SQL, mode='r') as f:
             db.cursor().executescript(f.read())
         db.commit()
 
-@app.before_request
-def before_request():
-    g.db = connect_db()
-    g.db.row_factory = sqlite3.Row
 
-@app.teardown_request
-def teardown_request(exception):
-    db = getattr(g, 'db', None)
-    if db is not None:
-        db.close()
+#@app.before_request
+#def before_request():
+#    # Open database connection if needed
+#    get_db()
 
-def query_db(query, args=(), one=False):
-    rs = None
+#@app.teardown_request
+#def teardown_request(exception):
+#    db = getattr(g, 'db', None)
+#    if db is not None:
+#        db.close()
 
-    db = getattr(g, 'db', None)
-    if db is not None:
-        cur = db.execute(query, args)
-        rs = cur.fetchall()
-        cur.close()
-    return (rs[0] if rs else None) if one else rs
+def query_db(query, args=(), single_row=False):
+    cur = get_db().execute(query, args)
+    results = cur.fetchall()
+    cur.close()
+
+    if single_row:
+        return results[0]
+    else:
+        return results
+
 
 def main():
     app.run()
