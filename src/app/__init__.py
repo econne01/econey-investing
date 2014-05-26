@@ -40,23 +40,14 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-
-#@app.before_request
-#def before_request():
-#    # Open database connection if needed
-#    get_db()
-
-#@app.teardown_request
-#def teardown_request(exception):
-#    db = getattr(g, 'db', None)
-#    if db is not None:
-#        db.close()
-
 def query_db(query, args=(), single_row=False):
     cur = get_db().execute(query, args)
+
+    if query.strip()[:6].upper() in ['INSERT', 'UPDATE']:
+        g._database.commit()
+
     results = cur.fetchall()
     cur.close()
-
     if single_row:
         return results[0]
     else:

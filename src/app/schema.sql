@@ -1,22 +1,20 @@
-DROP TABLE IF EXISTS stocks;
-CREATE TABLE stocks (
+CREATE TABLE IF NOT EXISTS stocks (
   date date not null,
   ticker text not null,
   volume real not null,
   price real not null
 );
 
-DROP TABLE IF EXISTS results_year;
-CREATE TABLE results_year (
+CREATE TABLE IF NOT EXISTS results_year (
   ticker text not null,
   year smallint not null,
   revenue real null,
   interest real null,
   net_income real null
 );
+CREATE UNIQUE INDEX IF NOT EXISTS IDX_Ticker_Year ON results_year (ticker, year);
 
-DROP TABLE IF EXISTS macro_jobs;
-CREATE TABLE macro_jobs (
+CREATE TABLE IF NOT EXISTS macro_jobs (
   year smallint not null,
   month smallint not null,
   series_key varchar(13) not null,

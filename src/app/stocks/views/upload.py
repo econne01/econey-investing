@@ -39,23 +39,46 @@ class StockHistoryUploader(EconeyBaseViewHandler):
     def save_file_data(self, file):
         ''' If file is in proper format, update database with data from file
         '''
-        row_cnt = 0
-        conn = sqlite3.connect(self.db_name)
-        cursor = conn.cursor()
+        from app import query_db
 
+        row_cnt = 0
         reader = csv.DictReader(file)
 
+        import pudb; pudb.set_trace()  # XXX BREAKPOINT
         if self.is_file_format_accepted(reader.fieldnames):
             for row in reader:
+                row = dict((k.lower(), v) for k,v in row.iteritems())
                 print row
-                qry = 'INSERT INTO ' + self.table_name
-                qry += ' (' + ','.join(reader.fieldnames) + ')'
-                qry += ' VALUES ("' + '","'.join([row[field] for field in reader.fieldnames]) + '")'
+                row_cnt += 1
+                try:
+                    # Try to INSERT
+                    qry = '''
+                        INSERT INTO {}
+                        ({})
+                        VALUES ({});
+                    '''.format(
+                        self.table_name,
+                        ','.join(reader.fieldnames),
+                        ','.join(['?' for field in reader.fieldnames]),
+                    )
 
-                cursor.execute(qry)
+                    args = [row[field] for field in reader.fieldnames]
+                    query_db(qry, args)
+                except IntegrityError as e:
+                    # If row already exists, then update it
+                    qry = '''
+                        UPDATE {}
+                        SET {}
+                        WHERE {}
+                    '''.format(
+                        self.table_name,
+                        ','.join([field + '=?' for field in self.column_format['optional']]),
+                        ' AND '.join([field + '=?' for field in self.column_format['fixed']]),
+                    )
+                    args = [row[field] for field in self.column_format['optional']]
+                    args += [row[field] for field in self.column_format['fixed']]
+                    query_db(qry, args)
 
-        conn.commit()
-        conn.close()
         return row_cnt
 
 @app.route('/upload', methods=['GET', 'POST'])
