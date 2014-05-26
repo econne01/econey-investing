@@ -64,7 +64,7 @@ class StockHistoryUploader(EconeyBaseViewHandler):
 
                     args = [row[field] for field in reader.fieldnames]
                     query_db(qry, args)
-                except IntegrityError as e:
+                except sqlite3.IntegrityError as e:
                     # If row already exists, then update it
                     qry = '''
                         UPDATE {}
